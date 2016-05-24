@@ -1,13 +1,12 @@
 package in.hocg.hocgin.inject.modules;
 
-import com.google.gson.Gson;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import in.hocg.hocgin.HttpRequest;
-import okhttp3.OkHttpClient;
+import in.hocg.hocgin.Constant;
+import in.hocg.hocgin.HttpClient;
+import in.hocg.hocgin.URL;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,29 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by hocgin on 16-5-24.
  */
 @Module
-@Singleton
 public class AppModule {
-    @Provides // 提供对象的方法
-    @Singleton // 单例
-    HttpRequest provideHttpClient(OkHttpClient okHttpClient, Gson gson) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .client(okHttpClient)
+
+    @Provides
+    @Singleton
+    URL.API provideAPI() {
+        return new Retrofit.Builder()
+                .baseUrl(Constant.API_URL)
+                .client(HttpClient.okHttpClient())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        return retrofit.create(HttpRequest.class);
-    }
-
-    @Provides // 提供对象的方法
-    @Singleton // 单例
-    Gson provideGson() {
-        return new Gson();
-    }
-
-    @Provides // 提供对象的方法
-    @Singleton // 单例
-    OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient.Builder().build();
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(URL.API.class);
     }
 }

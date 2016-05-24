@@ -8,7 +8,7 @@ import com.bugtags.library.Bugtags;
 /**
  * Created by hocgin on 16-5-24.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
@@ -27,4 +27,5 @@ public class BaseActivity extends AppCompatActivity {
         Bugtags.onDispatchTouchEvent(this, event);
         return super.dispatchTouchEvent(event);
     }
+
 }

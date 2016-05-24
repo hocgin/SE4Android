@@ -1,6 +1,6 @@
 package in.hocg.hocgin;
 
-import com.google.gson.Gson;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -11,21 +11,57 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by hocgin on 16-5-24.
  */
 public class HttpClient {
-    public static HttpRequest create() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .client(_okHttpClient())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .build();
-        return retrofit.create(HttpRequest.class);
+
+    private static OkHttpClient OK_HTTP_CLIENT;
+    private static URL.API URL_API;
+
+    /**
+     * 官方API
+     * @return
+     */
+    public static URL.API api() {
+        if (null == URL_API) {
+            synchronized (HttpClient.class) {
+                if (null == URL_API) {
+                    URL_API = new Retrofit.Builder()
+                            .baseUrl(Constant.API_URL)
+                            .client(okHttpClient())
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build()
+                            .create(URL.API.class);
+                }
+            }
+        }
+        return URL_API;
     }
 
-    private static OkHttpClient _okHttpClient() {
-        return new OkHttpClient.Builder().build();
-    }
 
-    private static Gson gson() {
-        return new Gson();
+
+    /**
+     * 初始化 OkHttpClient
+     *
+     * @return
+     */
+    public static OkHttpClient okHttpClient() {
+        if (OK_HTTP_CLIENT == null) {
+            synchronized (HttpClient.class) {
+                if (OK_HTTP_CLIENT == null) {
+                    // 指定缓存路径,缓存大小100Mb
+//                    Cache cache = new Cache(new File(App.getContext().getCacheDir(), "HttpCache"),
+//                            1024 * 1024 * 100);
+
+                    OK_HTTP_CLIENT = new OkHttpClient.Builder()
+//                            .cache(cache)
+//                            .addInterceptor(mRewriteCacheControlInterceptor)
+//                            .addNetworkInterceptor(mRewriteCacheControlInterceptor)
+//                            .addInterceptor(interceptor)
+                            .retryOnConnectionFailure(true)
+                            .connectTimeout(15, TimeUnit.SECONDS)
+                            .build();
+                }
+            }
+        }
+        return OK_HTTP_CLIENT;
     }
 }

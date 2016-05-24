@@ -8,12 +8,16 @@ import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
+import in.hocg.hocgin.inject.components.AppComponent;
+import in.hocg.hocgin.inject.components.DaggerAppComponent;
 import in.hocg.hocgin.myapplication.BuildConfig;
 
 /**
  * Created by hocgin on 16-5-23.
  */
 public class App extends Application {
+    static AppComponent appComponent = DaggerAppComponent.create();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -47,5 +51,9 @@ public class App extends Application {
                 trackingNetworkURLFilter("(.*)").//自定义网络请求跟踪的 url 规则
                 build();
         Bugtags.start(BuildConfig.BUGTAGS_APP_KEY, this, Bugtags.BTGInvocationEventNone, options);
+    }
+
+    public static AppComponent getAppComponent() {
+        return appComponent;
     }
 }
