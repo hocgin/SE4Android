@@ -13,6 +13,7 @@ import in.hocg.hocgin.inject.components.DaggerAppComponent;
 import in.hocg.hocgin.myapplication.BuildConfig;
 
 /**
+ * App
  * Created by hocgin on 16-5-23.
  */
 public class App extends Application {
