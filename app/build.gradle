@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.bugtags.library.plugin'
 apply plugin: 'com.neenbedankt.android-apt'
-//Bugtags 插件配置
-bugtags {
-    //自动上传符号表功能配置，如果需要根据 build varint 配置，请参考插件详细使用说明
-    appKey "5e966287d5d2f2941ed7c93b63789116"  //这里是你的 appKey
-    appSecret "d194ae4ef46755ee7a521a9ff4f1a6ad"    //这里是你的 appSecret，管理员在设置页可以查看
-    mappingUploadEnabled true
 
+def Properties hocgin = new Properties();
+hocgin.load(new FileInputStream(file(rootProject.file("hocgin.properties"))))
+
+bugtags { //Bugtags 插件配置
+    //自动上传符号表功能配置，如果需要根据 build varint 配置，请参考插件详细使用说明
+    appKey hocgin['bugTags.appKey']  //这里是你的 appKey
+    appSecret hocgin['bugTags.appSecret']    //这里是你的 appSecret，管理员在设置页可以查看
+    mappingUploadEnabled true
     //网络跟踪功能配置(企业版)
     trackingNetworkEnabled true
 }
@@ -51,9 +53,12 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
     compile 'com.google.dagger:dagger:2.2'
-    //    https://github.com/ReactiveX/RxAndroid
+    //    Glide
+    compile 'com.github.bumptech.glide:glide:3.5.2'
+    //    https://github.com/ReactiveX/RxAndroid [start]
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
+    //    https://github.com/ReactiveX/RxAndroid [end]
     apt 'com.google.dagger:dagger-compiler:2.2'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'

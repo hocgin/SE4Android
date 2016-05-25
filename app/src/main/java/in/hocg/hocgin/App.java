@@ -8,6 +8,7 @@ import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
+import butterknife.ButterKnife;
 import in.hocg.hocgin.inject.components.AppComponent;
 import in.hocg.hocgin.inject.components.DaggerAppComponent;
 import in.hocg.hocgin.myapplication.BuildConfig;
@@ -35,6 +36,7 @@ public class App extends Application {
     }
 
     private void _debug() {
+        ButterKnife.setDebug(true);
         LeakCanary.install(this);
         Stetho.initializeWithDefaults(this);
     }

@@ -1,4 +1,4 @@
-package in.hocg.hocgin.utils.simple;
+package in.hocg.hocgin.core.net.utils;
 
 import android.support.graphics.drawable.BuildConfig;
 
@@ -19,6 +19,7 @@ import retrofit2.Response;
  * Created by hocgin on 16-4-28.
  * 简单的 retrofit2 回调
  * 可自动打印请求url,入参,响应状态等
+ * @deprecated 使用rxJava进行交互
  */
 public abstract class SimpleControllerCallback<T> implements Callback<T> {
 

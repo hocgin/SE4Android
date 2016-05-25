@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import in.hocg.hocgin.activitys.MainActivity;
-import in.hocg.hocgin.controller.TestController;
+import in.hocg.hocgin.http.controller.APIController;
 import in.hocg.hocgin.inject.modules.AppModule;
 import in.hocg.hocgin.inject.modules.ControllerModule;
 
@@ -20,5 +20,5 @@ import in.hocg.hocgin.inject.modules.ControllerModule;
 )
 public interface AppComponent {
     void inject(MainActivity activity);
-    void inject(TestController controller);
+    void inject(APIController controller);
 }

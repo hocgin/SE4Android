@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import in.hocg.hocgin.controller.TestController;
+import in.hocg.hocgin.http.controller.APIController;
 
 /**
  * Created by hocgin on 16-5-24.
@@ -14,7 +14,7 @@ import in.hocg.hocgin.controller.TestController;
 public class ControllerModule {
     @Provides // 提供对象的方法
     @Singleton
-    TestController provideTestController() {
-        return new TestController();
+    APIController provideAPIController() {
+        return new APIController();
     }
 }

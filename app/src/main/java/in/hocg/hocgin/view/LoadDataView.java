@@ -8,31 +8,31 @@ import android.content.Context;
 public interface LoadDataView {
 
     /**
-     * Show a view with a progress bar indicating a loading process.
+     * show loading message
+     *
+     * @param msg
      */
-    void showLoading();
+    void showLoading(String msg);
 
     /**
-     * Hide a loading view.
+     * hide loading
      */
     void hideLoading();
 
     /**
-     * Show a retry view in case of an error when retrieving data.
+     * show error message
      */
-    void showRetry();
+    void showError(String msg);
 
     /**
-     * Hide a retry view shown if there was an error when retrieving data.
+     * show exception message
      */
-    void hideRetry();
+    void showException(String msg);
 
     /**
-     * Show an error message
-     *
-     * @param message A string representing an error.
+     * show net error
      */
-    void showError(String message);
+    void showNetError();
 
     /**
      * Get a {@link android.content.Context}.

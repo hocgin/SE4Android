@@ -5,14 +5,14 @@ import android.test.ApplicationTestCase;
 
 import com.orhanobut.logger.Logger;
 
-import in.hocg.hocgin.controller.TestController;
+import in.hocg.hocgin.http.controller.APIController;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class ApplicationTest extends ApplicationTestCase<Application> {
 
-    TestController testController;
+    APIController testController;
 
     public ApplicationTest() {
         super(Application.class);
