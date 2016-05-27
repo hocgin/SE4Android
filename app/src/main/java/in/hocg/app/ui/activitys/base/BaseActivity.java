@@ -90,21 +90,21 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadData
      *
      * @return
      */
-    abstract
+    public abstract
     @LayoutRes
     int getContentViewLayoutID();
 
     /**
      * 网络断开
      */
-    abstract void onNetworkDisconnected();
+    public abstract void onNetworkDisconnected();
 
     /**
      * 网络连接成功
      *
      * @param type
      */
-    abstract void onNetworkConnected(NetUtils.NetType type);
+    public abstract void onNetworkConnected(NetUtils.NetType type);
 
     @Override
     protected void onResume() {

@@ -44,17 +44,17 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    int getContentViewLayoutID() {
-        return R.layout.activity_main;
+    public int getContentViewLayoutID() {
+        return 0;
     }
 
     @Override
-    void onNetworkDisconnected() {
+    public void onNetworkDisconnected() {
 
     }
 
     @Override
-    void onNetworkConnected(NetUtils.NetType type) {
+    public void onNetworkConnected(NetUtils.NetType type) {
 
     }
 
